@@ -233,7 +233,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onPressed: () {},
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 20, top: 10, bottom: 10, right: 20),
+                                    left: 20, top: 15, bottom: 15, right: 20),
                                 child: Text('Add to basket'),
                               ),
                             )
