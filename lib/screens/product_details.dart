@@ -119,7 +119,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     child: Column(
                       children: <Widget>[
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +145,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                           loadedProducts.description,
                           style: TextStyle(
                             letterSpacing: 1,
-                            fontSize: 16,
+                            fontSize: 14,
                             color: Colors.grey,
                           ),
                         ),
@@ -199,7 +199,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         ),
                         Divider(),
                         SizedBox(
-                          height: 20,
+                          height: 2,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -211,7 +211,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                 Text(
                                   'Total',
                                   style: TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 SizedBox(
@@ -233,7 +233,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               onPressed: () {},
                               child: Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 30, top: 15, bottom: 15, right: 30),
+                                    left: 20, top: 10, bottom: 10, right: 20),
                                 child: Text('Add to basket'),
                               ),
                             )

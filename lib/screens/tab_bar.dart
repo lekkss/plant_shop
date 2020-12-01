@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:plant_shop/module/product_provider.dart';
 import 'package:plant_shop/screens/tab_bar_items.dart';
-import 'package:provider/provider.dart';
 
 class TabBarProducts extends StatefulWidget {
   @override
@@ -10,17 +8,17 @@ class TabBarProducts extends StatefulWidget {
 
 class _TabBarProductsState extends State<TabBarProducts>
     with SingleTickerProviderStateMixin {
-  TabController _tabController;
+  //TabController _tabController;
 
   @override
   void initState() {
-    _tabController = TabController(length: 5, vsync: this);
+    //_tabController = TabController(length: 5, vsync: this);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final products = Provider.of<ProductProvider>(context);
+    //final products = Provider.of<ProductProvider>(context);
     return Column(
       children: <Widget>[
         TabBar(
