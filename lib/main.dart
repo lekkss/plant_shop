@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:plant_shop/module/product_provider.dart';
 import 'package:plant_shop/screens/favorite_screen.dart';
 import 'package:plant_shop/screens/product_details.dart';
-import 'package:plant_shop/widget/bottom_navbar.dart';
+// import 'package:plant_shop/widget/bottom_navbar.dart';
 import 'package:plant_shop/widget/product_grid.dart';
 import 'package:provider/provider.dart';
 import './screens/tab_bar.dart';
@@ -49,99 +49,179 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  PageController _myPage;
+  var selectedPage;
+
+  @override
+  void initState() {
+    super.initState();
+    _myPage = PageController(initialPage: 0);
+    selectedPage = 0;
+  }
+
+  @override
+  void dispose() {
+    _myPage.dispose();
+    super.dispose();
+  }
+
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
+        body: PageView(
+          physics: NeverScrollableScrollPhysics(),
+          controller: _myPage,
+          children: <Widget>[
+            Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 30, left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(Icons.menu),
+                            onPressed: () {},
+                          ),
+                          Icon(Icons.notifications),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Form(
+                      child: Container(
+                        margin: EdgeInsets.only(left: 15, right: 15),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              style: BorderStyle.solid,
+                              color: Colors.grey[300]),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            enabledBorder: null,
+                            prefixIcon: Icon(
+                              Icons.search,
+                              size: 35,
+                              color: Colors.black,
+                            ),
+                            hintText: 'search plants....',
+                            hintStyle: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 15, right: 10),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            'Recommended',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          ),
+                          IconButton(
+                            icon: Icon(_expanded
+                                ? Icons.expand_less
+                                : Icons.expand_more),
+                            onPressed: () {
+                              setState(() {
+                                _expanded = !_expanded;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    ProductGrid(),
+                    TabBarProducts(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(left: 15),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Recently viewed',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                    ),
+                    ProductGrid()
+                  ],
+                ),
+              ),
+            ),
+            Center(
+                child: Center(
+              child: FavoriteScreen(),
+            )),
+            Center(child: Text("SHOP")),
+            Center(child: Text("PROFILE")),
+          ],
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      onPressed: () {},
-                    ),
-                    Icon(Icons.notifications),
-                  ],
+              IconButton(
+                icon: Icon(Icons.home),
+                onPressed: () {
+                  _myPage.jumpToPage(0);
+                  setState(() {
+                    selectedPage = 0;
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {
+                  _myPage.jumpToPage(1);
+                  setState(() {
+                    selectedPage = 1;
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.shop,
                 ),
+                onPressed: () {
+                  _myPage.jumpToPage(2);
+                  setState(() {
+                    selectedPage = 2;
+                  });
+                },
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Form(
-                child: Container(
-                  margin: EdgeInsets.only(left: 15, right: 15),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        style: BorderStyle.solid, color: Colors.grey[300]),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      enabledBorder: null,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        size: 35,
-                        color: Colors.black,
-                      ),
-                      hintText: 'search plants....',
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
+              IconButton(
+                icon: Icon(
+                  Icons.person,
                 ),
+                onPressed: () {
+                  _myPage.jumpToPage(3);
+                  setState(() {
+                    selectedPage = 3;
+                  });
+                },
               ),
-              SizedBox(
-                height: 30,
-              ),
-              Container(
-                margin: EdgeInsets.only(left: 15, right: 10),
-                child: Row(
-                  children: <Widget>[
-                    Text(
-                      'Recommended',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                          _expanded ? Icons.expand_less : Icons.expand_more),
-                      onPressed: () {
-                        setState(() {
-                          _expanded = !_expanded;
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              ProductGrid(),
-              TabBarProducts(),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 15),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Recently viewed',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                ),
-              ),
-              ProductGrid()
             ],
           ),
         ),
-        bottomNavigationBar: BottomBar(),
       ),
     );
   }
