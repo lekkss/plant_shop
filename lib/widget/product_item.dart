@@ -3,7 +3,12 @@ import 'package:plant_shop/module/product.dart';
 import 'package:plant_shop/screens/product_details.dart';
 import 'package:provider/provider.dart';
 
-class ProductItem extends StatelessWidget {
+class ProductItem extends StatefulWidget {
+  @override
+  _ProductItemState createState() => _ProductItemState();
+}
+
+class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);

@@ -4,8 +4,14 @@ import 'package:plant_shop/module/product_provider.dart';
 import 'package:plant_shop/widget/product_item.dart';
 import 'package:provider/provider.dart';
 
-class FavoriteScreen extends StatelessWidget {
+class FavoriteScreen extends StatefulWidget {
   static const routName = '/favorite-screen';
+
+  @override
+  _FavoriteScreenState createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<ProductProvider>(context);

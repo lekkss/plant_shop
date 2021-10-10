@@ -17,6 +17,7 @@ class Product with ChangeNotifier {
       this.isFavorite = false});
 
   void toggleFavoriteStatus() {
+    print("Called here");
     isFavorite = !isFavorite;
     notifyListeners();
   }

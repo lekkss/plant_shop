@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:plant_shop/module/product_provider.dart';
 import 'package:plant_shop/screens/favorite_screen.dart';
 import 'package:plant_shop/screens/product_details.dart';
-// import 'package:plant_shop/widget/bottom_navbar.dart';
+import 'package:plant_shop/widget/bottom_navbar.dart';
 import 'package:plant_shop/widget/product_grid.dart';
 import 'package:provider/provider.dart';
 import './screens/tab_bar.dart';
@@ -175,12 +175,23 @@ class _MyHomePageState extends State<MyHomePage> {
             Center(child: Text("PROFILE")),
           ],
         ),
+        // bottomNavigationBar: BottomNavigationBar(
+        //     selectedItemColor: Colors.red,
+        //     unselectedItemColor: Colors.black,
+        //     type: BottomNavigationBarType.fixed,
+        //     items: [
+        //       BottomNavigationBarItem(
+        //         icon: Icon(Icons.home),
+        //       ),
+        //     ]),
         bottomNavigationBar: BottomAppBar(
+          elevation: 2,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               IconButton(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home,
+                    color: selectedPage == 0 ? Colors.black : Colors.grey),
                 onPressed: () {
                   _myPage.jumpToPage(0);
                   setState(() {
@@ -189,7 +200,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(Icons.favorite),
+                icon: Icon(Icons.favorite,
+                    color: selectedPage == 1 ? Colors.black : Colors.grey),
                 onPressed: () {
                   _myPage.jumpToPage(1);
                   setState(() {
@@ -198,9 +210,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(
-                  Icons.shop,
-                ),
+                icon: Icon(Icons.shopping_basket,
+                    color: selectedPage == 2 ? Colors.black : Colors.grey),
                 onPressed: () {
                   _myPage.jumpToPage(2);
                   setState(() {
@@ -209,9 +220,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               IconButton(
-                icon: Icon(
-                  Icons.person,
-                ),
+                icon: Icon(Icons.person,
+                    color: selectedPage == 3 ? Colors.black : Colors.grey),
                 onPressed: () {
                   _myPage.jumpToPage(3);
                   setState(() {
